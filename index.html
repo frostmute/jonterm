@@ -79,10 +79,10 @@
       to bottom,
       rgba(0,0,0,0) 0px,
       rgba(0,0,0,0) 2px,
-      rgba(0,0,0,0.32) 3px,
-      rgba(0,0,0,0.32) 4px
+      rgba(0,0,0,0.55) 3px,
+      rgba(0,0,0,0.55) 4px
     );
-    opacity: 0.55;
+    opacity: 0.85;
     animation: scan 6s linear infinite;
   }
   @keyframes scan {
@@ -92,19 +92,19 @@
   .vignette {
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse 110% 100% at center, transparent 45%, rgba(0,0,0,0.55) 100%);
+    background: radial-gradient(ellipse 110% 100% at center, transparent 45%, rgba(0,0,0,0.7) 100%);
   }
   .flicker {
     position: absolute;
     inset: 0;
-    background: rgba(255, 184, 108, 0.018);
+    background: rgba(255, 184, 108, 0.025);
     animation: flicker 7s infinite;
   }
   @keyframes flicker {
     0%, 94%, 100% { opacity: 1; }
-    95% { opacity: 0.82; }
+    95% { opacity: 0.75; }
     96% { opacity: 1; }
-    97% { opacity: 0.93; }
+    97% { opacity: 0.85; }
     98% { opacity: 1; }
   }
 
@@ -517,6 +517,22 @@ const PROJECTS = {
     desc: 'An e-commerce and resale automation tool for managing storefront operations.',
     content: `# GhostList
 
+\`\`\`
+      _
+    _( )_
+   (_(%)_)
+     | |
+     | |
+     | |
+    _|_|_
+   /     \\
+  | () () |
+  |       |
+   \\  ^  /
+    |||||
+    |||||
+\`\`\`
+
 Automating storefront operations. A toolchain to scrape, inventory, and cross-list products automatically without tedious manual data entry.
 
 ## Tech
@@ -532,62 +548,92 @@ Automating storefront operations. A toolchain to scrape, inventory, and cross-li
     desc: 'An Obsidian.md plugin syncing Raindrop.io data to the Nexus Vault.',
     content: `# Make It Rain
 
-A Forth interpreter in 1024 bytes of C99.
-
 \`\`\`
- $ ./pforth
-: square dup * ;
-5 square .
-25 ok
+   ☁️ ☁️ ☁️
+    ☁️ ☁️
+  💧  💧  💧
+    💧  💧
+  💧  💧  💧
 \`\`\`
 
-## Why
+Bridging Raindrop.io bookmarks directly into the Obsidian Nexus Vault.
 
-I wanted to know how small a real programming language could be. Forth is the answer.
+Instead of waiting for APIs to give me what I want, I wrote a sync engine that maps Raindrop's JSON payloads into local Obsidian markdown files via Templater YAML bindings.
 
-## Features
-
-- Compiler for new words (\`: name ... ;\`)
-- All stack operations (\`dup\`, \`swap\`, \`drop\`, \`over\`, \`rot\`)
-- Arithmetic, comparison, branching
-- Memory access (\`@\`, \`!\`, \`,\`)
-- Outer interpreter loop
-
-## What Is Missing (Deliberately)
-
-- Strings
-- Floating point
-- Comments beyond \\\\
-- Anything that would push it over 1KB
+## Tech
+- TypeScript
+- Obsidian Plugin API
+- REST integration
 
 *— EOF —*`
   },
-  'glow.css': {
-    name: 'glow.css',
-    title: 'glow.css',
-    lang: 'CSS',
-    desc: 'A drop-in CSS file that adds phosphor glow to any element.',
-    content: `# glow.css
+  'tetromino': {
+    name: 'tetromino',
+    title: 'Tetromino',
+    lang: 'TypeScript / Node.js',
+    desc: 'An Are.na to Obsidian import integration pipeline.',
+    content: `# Tetromino
 
-A single CSS file. Adds CRT phosphor glow to text, borders, and shadows. Zero dependencies, zero JavaScript.
-
-\`\`\`html
-<link rel="stylesheet" href="glow.css">
-<h1 class="glow-amber">hello, world</h1>
+\`\`\`
+  +---+
+  |   |
+  +---+---+---+
+  |   |   |   |
+  +---+---+---+
 \`\`\`
 
-That is it. That is the library.
+Are.na channels shouldn't be silos. Tetromino pulls Are.na collections (images, texts, links) down to the local file system.
 
-## Palettes
+It parses the API responses and formats them into Obsidian-ready markdown, preserving the original curatorial structure.
 
-- \`glow-amber\`   — IBM 3270 amber
-- \`glow-green\`   — VT100 phosphor
-- \`glow-cyan\`    — modern terminal
+## Architecture
+- Node.js pipeline
+- Are.na v3 REST API
+- Jest & esbuild
+
+*— EOF —*`
+  },
+  'magmaflow': {
+    name: 'magmaflow',
+    title: 'MagmaFlow',
+    lang: 'TypeScript',
+    desc: 'An Obsidian plugin for visual thought structuring.',
+    content: `# MagmaFlow
+
+\`\`\`
+   /\\  /\\
+  /  \\/  \\
+ /        \\
+/__________\\
+\`\`\`
+
+Visual workflow and flow-based data routing inside Obsidian.
+
+*— EOF —*`
+  },
+  'amplenote-srs': {
+    name: 'amplenote-srs',
+    title: 'Amplenote Spaced Repetition (SRS)',
+    lang: 'JavaScript',
+    desc: 'A spaced repetition (FSRS-5) plugin for Amplenote.',
+    content: `# Amplenote SRS
+
+\`\`\`
+  [   Front   ] 
+        |       
+        v       
+  [   Back    ] 
+   /  |  |  \\
+ (1)(2)(3)(4)
+\`\`\`
+
+A native Spaced Repetition plugin for Amplenote, implementing the FSRS-5 algorithm directly inside the editor's sandbox.
+
+Since Amplenote's plugin environment has a strict ~260KB evaluation limit and doesn't allow external bundlers or node_modules natively, this was built via a custom esbuild IIFE pipeline and an inline markdown table parser.
+
 *— EOF —*`
   }
 };
-
-const ABOUT = `# about
 
 Jonathan J Wagner
 Owner @ DeepspaceGhost
@@ -680,6 +726,7 @@ COMMANDS
     tree              show the filesystem tree
     history           show command history
     neofetch          system info, the cute way
+    sl                steam locomotive
     man <command>     manual for a command
     clear             clear screen (also Ctrl+L)
     date              current date and time
@@ -1072,7 +1119,7 @@ function getCandidates(word, isFirst, cmd) {
     candidates = [...new Set(Object.keys(MAN_PAGES).concat(Object.keys(COMMANDS)))];
   } else if (cmd === 'theme') candidates = Object.keys(THEMES);
   else if (cmd === 'crt' || cmd === 'sound') candidates = ['on', 'off'];
-  else if (cmd === 'mail') candidates = ['hi@retro.sh'];
+  else if (cmd === 'mail') candidates = ['jonathanjameswagner@proton.me'];
   return candidates;
 }
 function updateGhost() {
@@ -1231,8 +1278,45 @@ COMMANDS.pwd = () => print(state.cwd.replace('~', '/home/user'));
 
 COMMANDS.whoami = () => printRaw('<div class="post">' + renderMarkdown(ABOUT) + '</div>');
 
+COMMANDS.sl = () => {
+  const train = `
+      ====        ________                ___________
+  _D _|  |_______/        \\__I_I_____===__|_________|
+   |(_)---  |   H\\________/ |   |        =|___ ___|      _________________
+   /     |  |   H  |  |     |   |         ||_| |_||     _|                \\_____A
+  |      |  |   H  |__--------------------| [___] |   =|                        |
+  | ________|___H__/__|_____/[][]~\\_______|       |   -|                        |
+  |/ |   |-----------I_____I [][] []  D   |=======|____|________________________|_
+__/ =| o |=-~~\\  /~~\\  /~~\\  /~~\\ ____Y___________|__|__________________________|_
+ |/-=|___|=    ||    ||    ||    |_____/~\\___/          |_D__D__D_|  |_D__D__D_|
+  \\_/      \\O=====O=====O=====O_/      \\_/               \\_/   \\_/    \\_/   \\_/
+  `;
+  
+  // Create a container that will animate the train moving across the screen
+  const id = 'train-' + Date.now();
+  printRaw(`
+    <style>
+      @keyframes choochoo {
+        0% { transform: translateX(100%); }
+        100% { transform: translateX(-150%); }
+      }
+      #${id} {
+        white-space: pre;
+        font-family: monospace;
+        color: var(--amber);
+        display: inline-block;
+        animation: choochoo 4s linear forwards;
+        overflow: hidden;
+      }
+    </style>
+    <div style="width: 100%; overflow: hidden; position: relative; height: 160px;">
+      <div id="${id}">${train}</div>
+    </div>
+  `);
+};
+
 COMMANDS.mail = (args) => {
-  if (!args[0]) { print('usage: mail <address>', 'error'); print('example: mail hi@retro.sh', 'dim'); return; }
+  if (!args[0]) { print('usage: mail <address>', 'error'); print('example: mail jonathanjameswagner@proton.me', 'dim'); return; }
   startMailCompose(args[0]);
 };
 
