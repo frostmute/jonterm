@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="retro.sh — a developer blog that behaves like a terminal.">
-<title>retro.sh — ~/blog</title>
+<meta name="description" content="Nyx 🦞 / Jonathan J Wagner — Developer & Designer Portfolio.">
+<title>Nyx 🦞 — ~/portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -415,95 +415,60 @@
 
 // =================== BLOG CONTENT ===================
 const POSTS = {
-  'building-things-that-last.md': {
-    name: 'building-things-that-last.md',
-    title: 'Building Things That Last',
-    date: '2024.03.14',
-    tags: ['engineering', 'philosophy', 'craft'],
-    readTime: 7,
-    content: `# Building Things That Last
+  'making-it-rain.md': {
+    name: 'making-it-rain.md',
+    title: 'A Dive into Obsidian plugin development: A Vibe-Coding Expedition',
+    date: '2025.01.15',
+    tags: ['obsidian', 'typescript', 'javascript', 'plugins'],
+    readTime: 6,
+    content: `# A Dive into Obsidian plugin development: A Vibe-Coding Expedition
 
-*I've been writing software for fifteen years. The thing I keep coming back to is this: most of what we build is temporary, and we know it, and we ship it anyway.*
+I build Import Integrations connecting walled-gardens to Obsidian. Make It Rain is my Raindrop.io sync plugin. 
 
-## The 18-Month Half-Life
+Instead of waiting for APIs to give me what I want, I wrote a sync engine that parses JSON blocks from REST APIs, maps them via a Templater YAML mapping layer, and dumps them natively into my Nexus Vault.
 
-The average npm package has a half-life of about eighteen months before it is deprecated, forked, abandoned, or quietly replaced by something with better marketing. Half the JavaScript frameworks from five years ago are punchlines today. The other half are tombstones in a \`node_modules\` somewhere.
+## The Problem
+Digital hoarding. If I see a link, I save it. If I see an image, I save it. Raindrop.io, Are.na, Anytype... they all become silos where data goes to die. The "Graveyard Pattern" works for files (\`~/Documents/Graveyard/YYYY-MM-<context>-cleanup/\`), but not for live metadata.
 
-We do not talk about this much. We are too busy learning the next thing.
+## The Solution
+A unified ingest pipeline. Make It Rain pulls Raindrop data. Tetromino pulls Are.na channels. Anytype-sync extracts the local Anytype AST. 
 
-## What Survives
+They all route into Obsidian. Obsidian is the central hoard.
 
-Look at what is still around from the 1970s:
+## Architecture
+- Fetch raw JSON
+- Pipe through an AST transformer
+- Apply Templater bindings
+- Write to \`.md\`
 
-- \`grep\`, \`awk\`, \`sed\` — text tools, unchanged in spirit
-- pipes — the original component model
-- the filesystem hierarchy
-- TCP/IP — the wire protocol of the internet
-- vi — yes, including the hjkl thing
-
-These were not the hippest tools of their era. They were the boring ones.
-
-> The best software is opinionated about the problem and agnostic about the solution.
-
-## Principles
-
-1. **Prefer composition over configuration.** Pipes outlive plugins.
-2. **Make the common case fast and the edge case possible.** Never the other way around.
-3. **Text is the universal interface.** If your tool cannot be scripted, it is a toy.
-4. **Boring is a feature.** Exciting is for hobbies.
-
-## A Confession
-
-I rewrote my blog last weekend. For the eleventh time. In a framework that did not exist three years ago. The previous version, written in a framework that did not exist five years ago, was perfectly fine.
-
-This time, I wrote it as a terminal. Because terminals do not go out of style.
+It's robust, it's local-first, and it means I never lose a bookmark to a dead SaaS startup again.
 
 *— EOF —*`
   },
 
-  'vim-forever.md': {
-    name: 'vim-forever.md',
-    title: 'Why I Still Use Vim in 2024',
-    date: '2024.02.28',
-    tags: ['vim', 'tools', 'editor'],
-    readTime: 5,
-    content: `# Why I Still Use Vim in 2024
+  'publishing-with-digital-garden.md': {
+    name: 'publishing-with-digital-garden.md',
+    title: 'How to publish with the Obsidian ‘Digital Garden’ plugin to GitHub Pages',
+    date: '2024.11.02',
+    tags: ['obsidian', 'digital-garden', 'github-pages', 'automation'],
+    readTime: 4,
+    content: `# How to publish with the Obsidian ‘Digital Garden’ plugin to GitHub Pages
 
-*Yes, I know about VS Code. Yes, I have tried Helix. Yes, I have seen your Emacs config. No, I am not switching.*
+The transition from a private markdown hoard to a public digital garden is a delicate one. I don't want to spin up a heavy CMS, and I don't want to copy-paste markdown files between folders.
 
-## The Setup Question
+The Obsidian 'Digital Garden' plugin bridges the gap, taking individual notes flagged with a specific frontmatter property and deploying them out to a Next.js frontend hosted on Vercel or GitHub Pages.
 
-Every six months someone asks me what editor I use. The answer has not changed since 2012. The follow-up is always the same: *but why?*
+## Workflow
 
-Here is why.
+1. I tag a note in my Nexus Vault with \`dg-publish: true\`.
+2. I trigger the Digital Garden publication command.
+3. The plugin commits the specific markdown files to a private GitHub repository.
+4. GitHub Actions (or Vercel) picks up the commit, builds the static site, and deploys it.
 
-## Modal Editing Is Just Better
+It's entirely frictionless. The note never leaves its original location in my graph, but its rendered output is available globally.
 
-In a normal editor, to delete a word you select it, then press delete. Two actions, plus the cognitive load of aiming.
-
-In Vim: \`daw\` — *delete a word*. One motion. The verb-noun grammar generalizes:
-
-- \`ci"\` — change inside quotes
-- \`das\` — delete a sentence
-- \`cip\` — change inside paragraph
-- \`gqip\` — reformat the paragraph
-
-Once your fingers learn the language, editing becomes *speaking*.
-
-## It Is Everywhere
-
-Every Linux server I have ever SSH'd into has Vim. Every docker container. Every CI runner. Every recovery shell. The skill transfers. The muscle memory compounds.
-
-Your fancy editor requires me to download 200MB of Electron to edit a config file on a remote box at 3am.
-
-No thanks.
-
-## The Real Reason
-
-Vim is the only editor that has gotten *worse* with each "improvement" attempt. Neovim, Vim 9, the LSP integration — all of these are concessions to people who wanted Vim to be more like other editors.
-
-The original Vim, the one from 1991, was already right.
-
+*— EOF —*`
+  },
 > The tools we keep are the ones that refused to compromise.
 
 ## Quitting
@@ -513,146 +478,57 @@ The original Vim, the one from 1991, was already right.
 *— EOF —*`
   },
 
-  'death-of-microservices.md': {
-    name: 'death-of-microservices.md',
-    title: 'The Slow Death of Microservices',
-    date: '2024.01.15',
-    tags: ['architecture', 'engineering', 'opinion'],
-    readTime: 9,
-    content: `# The Slow Death of Microservices
-
-*We took a pattern that worked at Amazon's scale and applied it to a CRUD app with 200 users. This went about as well as you would expect.*
-
-## What We Were Promised
-
-- Independent deployment
-- Independent scaling
-- Technology flexibility
-- Team autonomy
-- Fault isolation
-
-## What We Got
-
-- A distributed monolith
-- 47 services that all need to deploy together
-- A Kafka cluster that costs more than the rest of the infrastructure combined
-- Three weeks of on-call before every junior engineer quits
-- A tracing dashboard nobody understands
-
-## Where It Actually Helps
-
-Microservices make sense when:
-
-1. You have more than 50 engineers
-2. You have genuinely independent business domains
-3. Your scale demands independent scaling
-4. You are Netflix
-
-If any of these are not true, you do not need microservices. You need a well-factored monolith and a CI pipeline that runs in under five minutes.
-
-## The Pendulum
-
-The industry is swinging back.
-
-- Shopify runs on a single Ruby monolith
-- GitHub runs on a single Rails app
-- Stack Overflow runs on a single C# app serving 16 billion requests a month from nine servers
-
-> The boring architecture scales further than you think.
-
-## A Modest Proposal
-
-Start with a monolith. Extract a service only when the *organizational* cost of keeping it in the monolith exceeds the *operational* cost of running it separately.
-
-You will extract maybe two services. And they will be the right two.
-
-*— EOF —*`
-  },
-
-  'terminal-aesthetic.md': {
-    name: 'terminal-aesthetic.md',
-    title: 'In Praise of the Terminal Aesthetic',
-    date: '2023.11.20',
-    tags: ['design', 'cli', 'philosophy'],
-    readTime: 6,
-    content: `# In Praise of the Terminal Aesthetic
-
-*You are reading this in a terminal right now. That was not an accident.*
-
-## Why This Site Is A Terminal
-
-Three reasons.
-
-### 1. Honesty
-
-A terminal does not pretend to be a magazine. It does not have hero images, gradients, or animated call-to-action banners. It is what it is: a prompt, a cursor, and a stream of text. The reader knows exactly what they are getting.
-
-### 2. Speed
-
-This page is roughly 30KB. It loads in 80 milliseconds on a cold connection. There is no JavaScript bundle. There is no font-display swap. There is no cookie banner. There is just text.
-
-### 3. Respect
-
-A terminal assumes the user is competent. It does not hide options behind menus. It does not autocomplete their intent. It waits for them to speak, and it responds.
-
-> Most websites treat you like a customer. A terminal treats you like an operator.
-
-## The Cost
-
-Yes, there is friction. Yes, you have to learn commands. Yes, your grandparents cannot use it.
-
-That is the point.
-
-## Try This At Home
-
-If you build developer tools, consider shipping a CLI before — or instead of — a GUI. Your power users will thank you. Your support load will shrink. And your software will outlive the framework you wrote it in.
-
-*— EOF —*`
-  },
-
-  'letters-to-young-programmer.md': {
-    name: 'letters-to-young-programmer.md',
-    title: 'Letters to a Young Programmer',
-    date: '2023.09.04',
-    tags: ['career', 'advice', 'craft'],
+  'chrome-os-play-store.md': {
+    name: 'chrome-os-play-store.md',
+    title: 'How to Install Chrome OS on PC with Play Store Support',
+    date: '2023.08.12',
+    tags: ['chrome-os', 'hardware', 'tinkering', 'android'],
     readTime: 8,
-    content: `# Letters to a Young Programmer
+    content: `# How to Install Chrome OS on PC with Play Store Support
 
-*Things I wish someone had told me when I was twenty-two and thought I knew everything.*
+Reviving old hardware with Chrome OS is a classic hacker rite of passage, but native Play Store support is usually the missing link when you aren't using an official Chromebook.
 
-## I.
+The secret is the 'Brunch' framework.
 
-Learn one language deeply before learning five shallowly. The depth transfers; the breadth does not.
+## The Process
 
-## II.
+1. Download a compatible Chrome OS recovery image (usually for a device with similar architecture, like \`rammus\` or \`volteer\`).
+2. Build the Brunch framework onto a bootable USB drive.
+3. Patch the recovery image into the Brunch build.
+4. Boot from USB and install to the internal disk.
 
-Read code. More than you write. The ratio should be at least 10:1. Open source exists for a reason. Use it.
+Because Brunch bridges the hardware abstractions, the Play Store initializes perfectly, allowing you to run Android apps natively on a repurposed Windows laptop.
 
-## III.
+*— EOF —*`
+  },
 
-The bug is almost never in the framework. The bug is almost never in the compiler. The bug is in your code. Look there first. Look there second. Look there seventeenth.
+  'my-first-post.md': {
+    name: 'my-first-post.md',
+    title: 'My first blog post! Welcome to my site.',
+    date: '2023.01.01',
+    tags: ['meta', 'welcome'],
+    readTime: 2,
+    content: `# My first blog post! Welcome to my site.
 
-## IV.
+Welcome to my portfolio terminal. There isn't much here yet, but everything here is text. Everything here is scriptable. Everything here will still work in twenty years.
 
-Write tests. Not because testing is virtuous, but because the act of writing a test forces you to define what your code is supposed to do. Most bugs are revealed in this step, before the test even runs.
+To look around, just type \`ls\`.
 
-## V.
+*— EOF —*`
+  },
 
-Pick a senior engineer you admire. Watch what they do when they are stuck. You will notice they do not type faster. They read more carefully. They ask better questions. They take walks.
+  'ghostlist.sh': {
+    name: 'ghostlist.sh',
+    title: 'GhostList',
+    lang: 'Bash/JS',
+    desc: 'An e-commerce and resale automation tool for managing storefront operations.',
+    content: `# GhostList
 
-> Speed is a side effect of understanding. You cannot optimize for it directly.
+Automating storefront operations. A toolchain to scrape, inventory, and cross-list products automatically without tedious manual data entry.
 
-## VI.
-
-Your first job will teach you bad habits along with the good ones. This is fine. Just do not confuse the habits with the principles.
-
-## VII.
-
-The technology will change. The principles will not. Spend more time on the principles.
-
-## VIII.
-
-Nobody knows what they are doing. The senior engineer is improvising. The staff engineer is googling. The principal engineer is asking ChatGPT and verifying. The CTO is hoping. We are all just trying to ship something that does not break on a Tuesday.
+## Tech
+- Playwright
+- Local-first data architecture
 
 *— EOF —*`
   }
@@ -720,51 +596,65 @@ That is it. That is the library.
 - \`glow-magenta\` — for the bold
 
 *— EOF —*`
-  },
-  'markit': {
-    name: 'markit',
-    title: 'markit',
-    lang: 'Rust',
-    desc: 'A minimal markdown editor for people who think Word was a mistake.',
-    content: `# markit
+// =================== PROJECTS CONTENT ===================
+const PROJECTS = {
+  'make-it-rain': {
+    name: 'make-it-rain',
+    title: 'Make It Rain',
+    lang: 'TypeScript',
+    desc: 'An Obsidian.md plugin syncing Raindrop.io data to the Nexus Vault.',
+    content: `# Make It Rain
 
-A markdown editor with no chrome. No toolbar. No sidebar. No settings panel.
+Bridging Raindrop.io bookmarks directly into the Obsidian Nexus Vault.
 
-Just text.
+Instead of waiting for APIs to give me what I want, I wrote a sync engine that maps Raindrop's JSON payloads into local Obsidian markdown files via Templater YAML bindings.
 
-## Keyboard Shortcuts
-
-- \`Cmd+S\` — save (you will never need this; autosave is on)
-- \`Cmd+P\` — preview
-- \`Cmd+\\\` — split view
-- \`Cmd+W\` — close (joke; this quits the app)
-
-That is all the shortcuts. There are no others.
+## Tech
+- TypeScript
+- Obsidian Plugin API
+- REST integration
 
 *— EOF —*`
   },
-  'warp-core': {
-    name: 'warp-core',
-    title: 'warp-core',
-    lang: 'C++',
-    desc: 'A retro game engine targeting MS-DOS aesthetics on modern hardware.',
-    content: `# warp-core
+  'tetromino': {
+    name: 'tetromino',
+    title: 'Tetromino',
+    lang: 'TypeScript / Node.js',
+    desc: 'An Are.na to Obsidian import integration pipeline.',
+    content: `# Tetromino
 
-A game engine that thinks 1992 was the peak of visual design.
+Are.na channels shouldn't be silos. Tetromino pulls Are.na collections (images, texts, links) down to the local file system.
 
-## Specs
+It parses the API responses and formats them into Obsidian-ready markdown, preserving the original curatorial structure.
 
-- 320x240 internal resolution (scaled up)
-- 256-color palette (custom, hand-tuned)
-- Software rasterizer (no GPU)
-- Mod-style tracker music
-- Optional CRT post-processing
+## Architecture
+- Node.js pipeline
+- Are.na v3 REST API
+- Jest & esbuild
 
-## Why
+*— EOF —*`
+  },
+  'magmaflow': {
+    name: 'magmaflow',
+    title: 'MagmaFlow',
+    lang: 'TypeScript',
+    desc: 'An Obsidian plugin for visual thought structuring.',
+    content: `# MagmaFlow
 
-Modern games look like refrigerators. Too many polygons. Too much HDR. Too much ray-traced water reflecting a skybox nobody is looking at.
+Visual workflow and flow-based data routing inside Obsidian.
 
-I wanted to make games that looked like they came on five floppy disks.
+*— EOF —*`
+  },
+  'amplenote-srs': {
+    name: 'amplenote-srs',
+    title: 'Amplenote Spaced Repetition (SRS)',
+    lang: 'JavaScript',
+    desc: 'A spaced repetition (FSRS-5) plugin for Amplenote.',
+    content: `# Amplenote SRS
+
+A native Spaced Repetition plugin for Amplenote, implementing the FSRS-5 algorithm directly inside the editor's sandbox.
+
+Since Amplenote's plugin environment has a strict ~260KB evaluation limit and doesn't allow external bundlers or node_modules natively, this was built via a custom esbuild IIFE pipeline and an inline markdown table parser.
 
 *— EOF —*`
   }
@@ -772,51 +662,78 @@ I wanted to make games that looked like they came on five floppy disks.
 
 const ABOUT = `# about
 
-I am a software engineer who writes things on the internet occasionally.
+Jonathan J Wagner
+Owner @ DeepspaceGhost
+San Antonio, TX
 
-I have been shipping code professionally since 2009 — mostly infrastructure, developer tooling, and the occasional ill-advised side project. I have worked at three startups (two acquired, one dead), one big-tech company (no comment), and I currently do independent consulting.
+I'm a versatile and accomplished multidisciplinary creative, technician, 
+and production manager with a passion for innovation. Through years of 
+hands-on experience spanning both design and production environments, 
+I've developed a comprehensive understanding of creative workflows and 
+operational efficiency.
 
-I believe:
+## 🛠️ Key Projects & Experience
 
-- That the UNIX philosophy was right and we forgot it.
-- That most "modern" software is slower than the software it replaced.
-- That the terminal is the most honest UI we have ever built.
-- That Vim is correct and I will not be taking questions.
+**DeepspaceGhost (Owner | 2020–Present)**
+*   Online Storefront & Shop Design
+*   Apparel Design
 
-This blog is a terminal because terminals do not go out of style.
+**Freelance & Independent Work**
+*   **Software Development:** Obsidian.md Plugin *‘Make It Rain’* (2025–Present)
+*   **Software Development:** Tetromino (Are.na-Importer), MagmaFlow, hermes-clipper
+*   **Software Development:** Amplenote Spaced Repetition (SRS) plugin, Kanban plugin
+*   **Web Design:** Experimental Linksites / Link-in-Bio pages
+*   **Creative Arts:** Abstract Letterform / Typography
+*   **Photography:** Urban Photography
 
-> Reach me at hi@retro.sh — or type \`mail hi@retro.sh\` below.`;
+## 🧰 Essential Tools & Resources
+*   **Obsidian.md:** Cross-platform personal knowledge management (Nexus Vault)
+*   **Local AI:** Hermes, Pi, Kokoro TTS, Whisper
+*   **Are.na:** Visual collaboration, image boarding
+
+## 🌐 Digital Footprint
+*   **GitHub:** [frostmute](https://github.com/frostmute)
+*   **Email:** jonathanjameswagner@proton.me
+*   **Design Portfolios:** [Behance](https://be.net/jonathanjwagner)
+*   **Curation:** [Tumblr](https://deepspaceghost.tumblr.com/) | [Are.na](https://www.are.na/deepspace-ghost/channels)
+
+*— EOF —*`;
 
 const CONTACT = `# contact
 
-- email:    hi@retro.sh
-- github:   github.com/example
-- mastodon: @example@hachyderm.io
-- irc:      #retro on libera.chat (not always around)
-- pgp:      0xDEADBEEFCAFEBABE
+- email:    jonathanjameswagner@proton.me
+- github:   github.com/frostmute
+- phone:    726.247.5817
+- pigeon:   29°27'18.6012'' N - 98°38'23.2692'' W
 
-I read everything. I reply to most of it. Sometimes it takes a week.
+I read everything. I reply to most of it.
 
-Or just type \`mail hi@retro.sh\` and write me from this terminal.`;
+Or just type \`mail jonathanjameswagner@proton.me\` and write me from this terminal.`;
 
-const README = `# README.md
+const README = `# Nyx 🦞 — ~/portfolio
 
-welcome to retro.sh — a developer blog that thinks it is a terminal.
+welcome to the terminal portfolio of Jonathan J Wagner (frostmute).
 
-this is the entire website. there is no other page. there is no javascript
-framework. there is no cookie banner. there is just a prompt and a cursor
-and a small virtual filesystem containing things I have written.
+"I'm a versatile and accomplished multidisciplinary creative, technician, 
+and production manager with a passion for innovation. Through years of 
+hands-on experience spanning both design and production environments, 
+I've developed a comprehensive understanding of creative workflows and 
+operational efficiency."
 
-type \`help\` to see what you can do.
-type \`ls\` to look around.
-type \`cat README.md\` to read this again.
+Type \`help\` to see available commands.
+Type \`ls\` to browse projects and articles.
 
-> everything here is text. everything here is scriptable. everything here
-> will still work in twenty years.`;
+---
+Location: San Antonio, TX
+Email: jonathanjameswagner@proton.me
+GitHub: @frostmute
+Aliases: Nyx, DeepspaceGhost
+---
+`;
 
 // =================== HELP / MAN ===================
 const HELP_TEXT = `NAME
-    retro.sh - a developer blog, in terminal form
+    Nyx / jonterm - a developer portfolio, in terminal form
 
 SYNOPSIS
     <command> [arguments]
@@ -940,26 +857,26 @@ EXAMPLES
   whoami: `WHOAMI(1)
 
 NAME
-    whoami - display effective user id (in this case, the author)
+    whoami - display author info
 
 SYNOPSIS
     whoami
 
 DESCRIPTION
-    Display information about the author of this blog.`,
+    Displays a brief biography of Jonathan J Wagner (frostmute).`,
 
   mail: `MAIL(1)
 
 NAME
-    mail - send a message to the author
+    mail - compose a message
 
 SYNOPSIS
-    mail <address>
+    mail <jonathanjameswagner@proton.me>
 
 DESCRIPTION
-    Compose and send an email. After invoking the command, you will
-    be prompted for a subject and body. End the body with a single
-    '.' on its own line, or press Ctrl+D.
+    Send an email from within the terminal. Requires a valid address.`,
+
+  tree: `TREE(1)
 
     A backup of the message will also be opened in your system mail
     client via mailto:.
