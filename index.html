@@ -469,15 +469,6 @@ It's entirely frictionless. The note never leaves its original location in my gr
 
 *— EOF —*`
   },
-> The tools we keep are the ones that refused to compromise.
-
-## Quitting
-
-\`:q!\`
-
-*— EOF —*`
-  },
-
   'chrome-os-play-store.md': {
     name: 'chrome-os-play-store.md',
     title: 'How to Install Chrome OS on PC with Play Store Support',
@@ -501,7 +492,6 @@ Because Brunch bridges the hardware abstractions, the Play Store initializes per
 
 *— EOF —*`
   },
-
   'my-first-post.md': {
     name: 'my-first-post.md',
     title: 'My first blog post! Welcome to my site.',
@@ -515,8 +505,11 @@ Welcome to my portfolio terminal. There isn't much here yet, but everything here
 To look around, just type \`ls\`.
 
 *— EOF —*`
-  },
+  }
+};
 
+// =================== PROJECTS CONTENT ===================
+const PROJECTS = {
   'ghostlist.sh': {
     name: 'ghostlist.sh',
     title: 'GhostList',
@@ -531,16 +524,13 @@ Automating storefront operations. A toolchain to scrape, inventory, and cross-li
 - Local-first data architecture
 
 *— EOF —*`
-  }
-};
-
-const PROJECTS = {
-  'pocketforth': {
-    name: 'pocketforth',
-    title: 'pocketforth',
-    lang: 'C',
-    desc: 'A complete Forth interpreter in exactly 1KB of C.',
-    content: `# pocketforth
+  },
+  'make-it-rain': {
+    name: 'make-it-rain',
+    title: 'Make It Rain',
+    lang: 'TypeScript',
+    desc: 'An Obsidian.md plugin syncing Raindrop.io data to the Nexus Vault.',
+    content: `# Make It Rain
 
 A Forth interpreter in 1024 bytes of C99.
 
@@ -593,69 +583,6 @@ That is it. That is the library.
 - \`glow-amber\`   — IBM 3270 amber
 - \`glow-green\`   — VT100 phosphor
 - \`glow-cyan\`    — modern terminal
-- \`glow-magenta\` — for the bold
-
-*— EOF —*`
-// =================== PROJECTS CONTENT ===================
-const PROJECTS = {
-  'make-it-rain': {
-    name: 'make-it-rain',
-    title: 'Make It Rain',
-    lang: 'TypeScript',
-    desc: 'An Obsidian.md plugin syncing Raindrop.io data to the Nexus Vault.',
-    content: `# Make It Rain
-
-Bridging Raindrop.io bookmarks directly into the Obsidian Nexus Vault.
-
-Instead of waiting for APIs to give me what I want, I wrote a sync engine that maps Raindrop's JSON payloads into local Obsidian markdown files via Templater YAML bindings.
-
-## Tech
-- TypeScript
-- Obsidian Plugin API
-- REST integration
-
-*— EOF —*`
-  },
-  'tetromino': {
-    name: 'tetromino',
-    title: 'Tetromino',
-    lang: 'TypeScript / Node.js',
-    desc: 'An Are.na to Obsidian import integration pipeline.',
-    content: `# Tetromino
-
-Are.na channels shouldn't be silos. Tetromino pulls Are.na collections (images, texts, links) down to the local file system.
-
-It parses the API responses and formats them into Obsidian-ready markdown, preserving the original curatorial structure.
-
-## Architecture
-- Node.js pipeline
-- Are.na v3 REST API
-- Jest & esbuild
-
-*— EOF —*`
-  },
-  'magmaflow': {
-    name: 'magmaflow',
-    title: 'MagmaFlow',
-    lang: 'TypeScript',
-    desc: 'An Obsidian plugin for visual thought structuring.',
-    content: `# MagmaFlow
-
-Visual workflow and flow-based data routing inside Obsidian.
-
-*— EOF —*`
-  },
-  'amplenote-srs': {
-    name: 'amplenote-srs',
-    title: 'Amplenote Spaced Repetition (SRS)',
-    lang: 'JavaScript',
-    desc: 'A spaced repetition (FSRS-5) plugin for Amplenote.',
-    content: `# Amplenote SRS
-
-A native Spaced Repetition plugin for Amplenote, implementing the FSRS-5 algorithm directly inside the editor's sandbox.
-
-Since Amplenote's plugin environment has a strict ~260KB evaluation limit and doesn't allow external bundlers or node_modules natively, this was built via a custom esbuild IIFE pipeline and an inline markdown table parser.
-
 *— EOF —*`
   }
 };
